@@ -1,5 +1,4 @@
 import java.util.Arrays;
-
 public class SudokuSolver {
 
     int[][][] boards = {
@@ -70,17 +69,20 @@ public class SudokuSolver {
     }
 
     public void printBoards(int[][][] boards) {
+        StringBuilder result = new StringBuilder();
+
         for (int n = 0; n < 3; n++) {
             for (int i = 0; i < 9; i++) {
                 for (int j = 0; j < 9; j++) {
-                    System.out.print(boards[n][i][j] + " ");
+                    result.append(boards[n][i][j]).append(" ");
                 }
-                System.out.println();  // Move to the next line after each row
+                result.append("\n");
             }
-            System.out.println();
+            result.append("\n");
         }
-    }
 
+        System.out.print(result.toString());
+    }
     public void solveAll() {
         printBoards(boards);
         for (int[][] board : boards) {

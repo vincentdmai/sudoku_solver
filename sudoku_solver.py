@@ -1,4 +1,3 @@
-import multiprocessing
 import numpy as np
 
 '''
@@ -42,44 +41,6 @@ boards = [
     [0, 0, 5, 2, 0, 6, 3, 0, 0]
   ], dtype=int)
 ]
-
-
-def dfs(board, d):
-  if d == 81:
-    # DUB
-    return
-  
-  i = d // 9
-  j = d % 9
-
-  flags = np.full(10, True, dtype=bool)
-  if board[i][j] != 0:
-    return dfs(board, d+1)
-
-  validate(board, i , j, flags)
-  for k in range(9,0, -1):
-    if flags[k]:
-      board[i][j] = k
-      if dfs(board, d+1):
-        return True
-  board[i][j] = 0
-  return False
-  
-def validate(board, i, j, flags):
-  flags.fill(True)
-  for k in range(9):
-    if board[i][k] != 0:
-      flags[board[i][k]] = False
-    
-    if board[k][j] != 0:
-      flags[board[k][j]] = False
-
-    r = i // 3 * 3
-    c = j // 3 * 3
-
-    if board[r][c] != 0:
-      flags[board[r][c]] = False
-
 
 def solve_sudoku(board):
   """This solution modifies board in-place instead.
